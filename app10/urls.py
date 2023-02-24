@@ -16,5 +16,6 @@ urlpatterns = [
 #################################################################
     path('admin_index/',views.admin_index),
     path('admin_register/',views.admin_register),
-    path('admin_login/',views.admin_login), 
+    path('admin_login/',views.admin_login),
+    path('admin_logout/',views.admin_logout),
 ]
