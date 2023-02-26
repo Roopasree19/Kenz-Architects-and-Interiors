@@ -1,0 +1,46 @@
+{% extends 'admin/headerfooter.html' %}
+ {% block content %}
+
+							<!--//outer-wp-->
+								<div class="outter-wp">
+											<!--/sub-heard-part-->
+											 <div class="sub-heard-part">
+													   <ol class="breadcrumb m-b-0">
+															<li><a href="index.html">Home</a></li>
+															<li class="active">Forms</li>
+														</ol>
+											</div>	
+											<!--/sub-heard-part-->	
+												<!--/forms-->
+												<h4 style="color:red; text-align: center;">{{error}}</h4>
+													<div class="forms-main">
+														<h2 class="inner-tittle">Project Form </h2>
+															<div class="graph-form">
+																	<div class="form-body">
+																		<form action="/admin_projects/" method="post" enctype="multipart/form-data">
+																			{% csrf_token %}
+																	<div class="form-group">
+																<label for="exampleInputEmail1">Name</label>
+										<input type="text" class="form-control" name="name" placeholder=""> 
+																		</div> 
+											
+						 <div class="form-group">
+					<label for="exampleInputFile">File input</label>
+									<input type="file" name="image" id="exampleInputFile"> 
+									
+																	        <!-- <p class="help-block">Example block-level help text here.</p> -->
+																	    </div>
+																	   <!--  <div class="checkbox">
+																	        <label> <input type="checkbox"> Check me out </label>
+																	    </div> -->
+																	     <button type="submit" class="btn btn-default">Submit</button> 
+																	    </form> 
+																	</div>
+
+															</div>
+																<!--//forms-inner-->
+																</div> 
+														<!--//forms-->											   
+												</div>
+													{% endblock %}	
+							

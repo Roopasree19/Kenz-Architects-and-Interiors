@@ -1,0 +1,78 @@
+{% extends 'admin/headerfooter.html' %}
+ {% block content %}
+
+							<!--//outer-wp-->
+								<div class="outter-wp">
+											<!--/sub-heard-part-->
+											 <div class="sub-heard-part">
+													   <ol class="breadcrumb m-b-0">
+															<li><a href="index.html">Home</a></li>
+															<li class="active">Forms</li>
+														</ol>
+											</div>	
+											<!--/sub-heard-part-->	
+												<!--/forms-->
+												<h4 style="color:red; text-align: center;">{{error}}</h4>
+													<div class="forms-main">
+														<h2 class="inner-tittle">Gallery Form </h2>
+															<div class="graph-form">
+																	<div class="form-body">
+																		<form action="/admin_gallupd/?uid={{x.id}}" method="post" enctype="multipart/form-data">
+																			{% csrf_token %}
+																	
+											
+						 <div class="form-group">
+						 		<label for="exampleInputFile">File input</label>
+					<img src="{{x.image.url}}" width="200" height="200">
+					 </div>
+					 <div class="form-group">
+											<label for="exampleInputgender">Do you want to update image</label> 
+										
+										<div class="radio">
+													<label>
+													  <input type="radio" name="imgup" value="yes" onchange="hide();" id="chkYes" required>
+													  yes
+													</label>
+												</div>
+												<div class="radio">
+													<label>
+													<input type="radio" name="imgup" value="no" onchange="hide();" checked required>
+													no
+													</label>
+												</div>
+										</div> 
+										<div class="form-group" id="fileimg" style="display: none;">
+					<label for="exampleInputFile">File input</label>
+									<input type="file" name="image" id="exampleInputFile"> 
+									
+																	        <!-- <p class="help-block">Example block-level help text here.</p> -->
+																	    </div>
+																	   <!--  <div class="checkbox">
+																	        <label> <input type="checkbox"> Check me out </label>
+																	    </div> -->
+																	     <button type="submit" class="btn btn-default">Submit</button> 
+																	    </form> 
+																	</div>
+
+															</div>
+																<!--//forms-inner-->
+																</div> 
+														<!--//forms-->											   
+												</div>
+												<script type="text/javascript">
+						function hide(){
+							var chkYes = document.getElementById("chkYes");
+							var filediv = document.getElementById("fileimg");
+
+						filediv.style.display = chkYes.checked ? "block" : "none";
+						if (chkYes.checked){
+							var img = document.getElementById("img").required = true;
+
+						}
+                        else{
+                        	var img = document.getElementById("img").required = false
+                        }
+						}
+					</script>
+													{% endblock %}	
+							

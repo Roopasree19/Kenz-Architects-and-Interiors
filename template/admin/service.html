@@ -1,4 +1,4 @@
- {% extends 'admin/headerfooter1.html' %}
+ {% extends 'admin/headerfooter.html' %}
  {% block content %}
 
 							<!--//outer-wp-->
@@ -12,23 +12,44 @@
 											</div>	
 											<!--/sub-heard-part-->	
 												<!--/forms-->
+												<h4 style="color:red; text-align: center;">{{error}}</h4>
 													<div class="forms-main">
-														<h2 class="inner-tittle">Basic Form </h2>
+														<h2 class="inner-tittle">Service Form </h2>
 															<div class="graph-form">
 																	<div class="form-body">
-																		<form> <div class="form-group"> <label for="exampleInputEmail1">Email address</label> <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"> </div> <div class="form-group"> <label for="exampleInputPassword1">Password</label> <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> </div> <div class="form-group"> <label for="exampleInputFile">File input</label> <input type="file" id="exampleInputFile"> <p class="help-block">Example block-level help text here.</p> </div> <div class="checkbox"> <label> <input type="checkbox"> Check me out </label> </div> <button type="submit" class="btn btn-default">Submit</button> </form> 
+																		<form action="/admin_forms/" method="post" enctype="multipart/form-data">
+																			{% csrf_token %}
+																	<div class="form-group">
+																<label for="exampleInputEmail1">Name</label>
+										<input type="text" class="form-control" name="name" placeholder=""> 
+																		</div> 
+											<div class="form-group">
+									 <label for="exampleInputPassword1">Description</label>
+								<input type="text" class="form-control" name="desc" placeholder="">
+																	    </div> 
+						 <div class="form-group">
+					<label for="exampleInputFile">File input</label>
+									<input type="file" name="image" id="exampleInputFile"> 
+									
+																	        <!-- <p class="help-block">Example block-level help text here.</p> -->
+																	    </div>
+																	   <!--  <div class="checkbox">
+																	        <label> <input type="checkbox"> Check me out </label>
+																	    </div> -->
+																	     <button type="submit" class="btn btn-default">Submit</button> 
+																	    </form> 
 																	</div>
 
 															</div>
 																<!--/forms-inner-->
-													  				<div class="forms-inner">
-																	  <!--/set-1-->
-																		<div class="set-1">
+													  				<!-- <div class="forms-inner">
+																	  <!-/set-1-->
+																		<!-- <div class="set-1">
 																			<div class="col-md-6 graph-2">
 																				<h3 class="inner-tittle two">Horizontal form  </h3>
 																					<div class="grid-1">
 																							<div class="form-body">
-	{% endblock %}																							
+																						
 																										<form class="form-horizontal"> <div class="form-group"> <label for="inputEmail3" class="col-sm-2 control-label">Email</label> <div class="col-sm-9"> <input type="email" class="form-control" id="inputEmail3" placeholder="Email"> </div> </div> <div class="form-group"> <label for="inputPassword3" class="col-sm-2 control-label">Password</label> <div class="col-sm-9"> <input type="password" class="form-control" id="inputPassword3" placeholder="Password"> </div> </div> <div class="form-group"> <div class="col-sm-offset-2 col-sm-10"> <div class="checkbox"> <label> <input type="checkbox"> Remember me </label> </div> </div> </div> <div class="col-sm-offset-2"> <button type="submit" class="btn btn-default">Sign in</button> </div> </form> 
 																							</div>
 
@@ -43,10 +64,10 @@
 																							 </div>
 																					</div>
 																				 <div class="clearfix"> </div>
-																			</div>
+																			</div> -->
 																			 <!--//set-1-->
 																			  <!--/set-2-->
-																		<div class="set-1">
+																		<!-- <div class="set-1">
 																			<div class="graph-2 general">
 																				<h3 class="inner-tittle two">General Form  </h3>
 																					<div class="grid-1">
@@ -157,10 +178,10 @@
 
 																					</div>
 																				</div>
-																			</div>
+																			</div> -->
 																			 <!--//set-2-->
 																			 <!--/set-3-->
-																			 <div class="set-3">
+																		<!-- 	 <div class="set-3">
 																				<div class="graph-2 general">
 																					<h3 class="inner-tittle two">General Form  </h3>
 																						<div class="grid-1">
@@ -315,9 +336,9 @@
 																						</div>
 																				</div>
 																			</div>
-																			<!--//set-3-->
+																			<!-//set-3-->
 																			<!--/set-4-->
-																			 <div class="set-4">
+<!-- 																			 <div class="set-4">
 																				<div class="graph-2 general">
 																					<h3 class="inner-tittle two">General Form  </h3>
 																						<div class="grid-1">
@@ -328,132 +349,11 @@
 																						</div>
 																				</div>
 																			</div>
-																		   <!--//set-4-->
-																		</div>
+																		   <!-//set-4-->
+																		<!-- </div>  --> 
 																	<!--//forms-inner-->
 																</div> 
 														<!--//forms-->											   
 												</div>
-											<!--//outer-wp-->
-									 <!--footer section start-->
-										<footer>
-										   <p>&copy 2016 Augment . All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">W3layouts.</a></p>
-										</footer>
-									<!--footer section end-->
-								</div>
-							</div>
-				<!--//content-inner-->
-			<!--/sidebar-menu-->
-				<div class="sidebar-menu">
-					<header class="logo">
-					<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> <a href="index.html"> <span id="logo"> <h1>Augment</h1></span> 
-						<!--<img id="logo" src="" alt="Logo"/>--> 
-					</a> 
-					</header>
-				<div style="border-top:1px solid rgba(69, 74, 84, 0.7)"></div>
-			<!--/down-->
-							<div class="down">	
-									  <a href="index.html"><img src="images/admin.jpg"></a>
-									  <a href="index.html"><span class=" name-caret">Jasmin Leo</span></a>
-									 <p>System Administrator in Company</p>
-									<ul>
-									<li><a class="tooltips" href="index.html"><span>Profile</span><i class="lnr lnr-user"></i></a></li>
-										<li><a class="tooltips" href="index.html"><span>Settings</span><i class="lnr lnr-cog"></i></a></li>
-										<li><a class="tooltips" href="index.html"><span>Log out</span><i class="lnr lnr-power-switch"></i></a></li>
-										</ul>
-									</div>
-							   <!--//down-->
-                                  <div class="menu">
-									<ul id="menu" >
-										<li><a href="index.html"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
-										 <li id="menu-academico" ><a href="#"><i class="fa fa-table"></i> <span> Tabs &amp; Panels</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-										   <ul id="menu-academico-sub" >
-											<li id="menu-academico-avaliacoes" ><a href="tabs.html"> Tabs &amp; Panels</a></li>
-											<li id="menu-academico-boletim" ><a href="widget.html">Widgets</a></li>
-											<li id="menu-academico-avaliacoes" ><a href="calender.html">Calendar</a></li>
-											
-										  </ul>
-										</li>
-										 <li id="menu-academico" ><a href="#"><i class="fa fa-file-text-o"></i> <span>Ui Elements</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-											 <ul id="menu-academico-sub" >
-												<li id="menu-academico-avaliacoes" ><a href="forms.html">Forms</a></li>
-												<li id="menu-academico-boletim" ><a href="validation.html">Validation Forms</a></li>
-												<li id="menu-academico-boletim" ><a href="table.html">Tables</a></li>
-												<li id="menu-academico-boletim" ><a href="Buttons.html">Buttons</a></li>
-											  </ul>
-										 </li>
-									<li><a href="typography.html"><i class="lnr lnr-pencil"></i> <span>Typography</span></a></li>
-									<li id="menu-academico" ><a href="#"><i class="lnr lnr-book"></i> <span>Pages</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-										  <ul id="menu-academico-sub" >
-										    <li id="menu-academico-avaliacoes" ><a href="Login.html">Login</a></li>
-										    <li id="menu-academico-boletim" ><a href="register.html">Register</a></li>
-											<li id="menu-academico-boletim" ><a href="404.html">404</a></li>
-											<li id="menu-academico-boletim" ><a href="sign.html">Sign up</a></li>
-											<li id="menu-academico-boletim" ><a href="profile.html">Profile</a></li>
-										  </ul>
-									 </li>
-									 <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Mail Box</span><span class="fa fa-angle-right" style="float: right"></span></a>
-									   <ul>
-										<li><a href="inbox.html"><i class="fa fa-inbox"></i> Inbox</a></li>
-										<li><a href="inbox.html"><i class="fa fa-pencil-square-o"></i> Compose Mail</a></li>
-											<li><a href="editor.html"><span class="lnr lnr-highlight"></span> Editors Page</a></li>
-									
-									  </ul>
-									</li>
-							        <li id="menu-academico" ><a href="#"><i class="lnr lnr-layers"></i> <span>Components</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-										 <ul id="menu-academico-sub" >
-											<li id="menu-academico-avaliacoes" ><a href="grids.html">Grids</a></li>
-											<li id="menu-academico-boletim" ><a href="media.html">Media Objects</a></li>
-
-										  </ul>
-									 </li>
-									<li><a href="chart.html"><i class="lnr lnr-chart-bars"></i> <span>Charts</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-									  <ul>
-										<li><a href="map.html"><i class="lnr lnr-map"></i> Maps</a></li>
-										<li><a href="graph.html"><i class="lnr lnr-apartment"></i> Graph Visualization</a></li>
-									</ul>
-									</li>
-									<li id="menu-comunicacao" ><a href="#"><i class="fa fa-smile-o"></i> <span>More</span><span class="fa fa-angle-double-right" style="float: right"></span></a>
-									   <ul id="menu-comunicacao-sub" >
-										<li id="menu-mensagens" style="width:120px" ><a href="project.html">Projects <i class="fa fa-angle-right" style="float: right; margin-right: -8px; margin-top: 2px;"></i></a>
-										  <ul id="menu-mensagens-sub" >
-											<li id="menu-mensagens-enviadas" style="width:130px" ><a href="ribbon.html">Ribbons</a></li>
-											<li id="menu-mensagens-recebidas"  style="width:130px"><a href="blank.html">Blank</a></li>
-										  </ul>
-										</li>
-										<li id="menu-arquivos" ><a href="500.html">500</a></li>
-									  </ul>
-									</li>
-								  </ul>
-								</div>
-							  </div>
-							  <div class="clearfix"></div>		
-							</div>
-							<script>
-							var toggle = true;
-										
-							$(".sidebar-icon").click(function() {                
-							  if (toggle)
-							  {
-								$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-								$("#menu span").css({"position":"absolute"});
-							  }
-							  else
-							  {
-								$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-								setTimeout(function() {
-								  $("#menu span").css({"position":"relative"});
-								}, 400);
-							  }
-											
-											toggle = !toggle;
-										});
-							</script>
-<!--js -->
-<script src="js/jquery.nicescroll.js"></script>
-<script src="js/scripts.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-   <script src="js/bootstrap.min.js"></script>
-</body>
-</html>
+													{% endblock %}	
+							
