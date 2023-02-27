@@ -16,28 +16,28 @@ def about(request):
 
 
 def contact(request):
-	if request.method == "POST":
-		cname=request.POST['name']
-		cemail=request.POST['email']
-		cphone=request.POST['phone']
-		csubject=request.POST['subject']
-		cmessage=request.POST['message']
-		check=contact_tb.objects.filter(email=cemail)
-		if check:
-			return render(request,'contact.html',{'error':'already registered'})
-		else:
-			add=contact_tb(name=cname,email=cemail,phone=cphone,subject=csubject,message=cmessage)
-			add.save()
+	# if request.method == "POST":
+	# 	cname=request.POST['name']
+	# 	cemail=request.POST['email']
+	# 	cphone=request.POST['phone']
+	# 	csubject=request.POST['subject']
+	# 	cmessage=request.POST['message']
+	# 	check=contact_tb.objects.filter(email=cemail)
+	# 	if check:
+	# 		return render(request,'contact.html',{'error':'already registered'})
+	# 	else:
+	# 		add=contact_tb(name=cname,email=cemail,phone=cphone,subject=csubject,message=cmessage)
+	# 		add.save()
 
-			x = ''.join(random.choices(cname + string.digits, k=8))
-			y = ''.join(random.choices(string.ascii_letters + string.digits, k=7))
-			subject = 'welcome to liveproject'
-			message = f'Hi {cname}, thank you for visiting Kenz Architects and Interiors'
-			email_from = settings.EMAIL_HOST_USER 
-			recipient_list = [cemail, ] 
-			send_mail( subject, message, email_from, recipient_list ) 
-		return render(request,'index.html',{'success':"data saved"})
-	else:
+	# 		x = ''.join(random.choices(cname + string.digits, k=8))
+	# 		y = ''.join(random.choices(string.ascii_letters + string.digits, k=7))
+	# 		subject = 'welcome to liveproject'
+	# 		message = f'Hi {cname}, thank you for visiting Kenz Architects and Interiors'
+	# 		email_from = settings.EMAIL_HOST_USER 
+	# 		recipient_list = [cemail, ] 
+	# 		send_mail( subject, message, email_from, recipient_list ) 
+	# 	return render(request,'index.html',{'success':"data saved"})
+	# else:
 		return render(request,'contact.html')
 
 def gallery(request):
@@ -48,6 +48,9 @@ def projects(request):
 
 def services(request):
 	return render(request,'services.html')
+
+def servicespage(request):
+	return render(request,'servicespage.html')
 
 
 
@@ -120,6 +123,46 @@ def  admin_service(request):
 def admin_servtb(request):
 	data=service_tb.objects.all()
 	return render(request,'admin/servtb.html',{'details':data})
+
+def admin_servupd(request):
+	if request.method == "POST":
+		cname=request.POST['name']
+		cdesc=request.POST['desc']
+		fid=request.GET['uid']
+		imgval=request.POST['imgup']
+		if imgval =="yes":
+
+			cimage=request.FILES['image']
+			oldrec=service_tb.objects.filter(id=fid)
+			updrec=service_tb.objects.get(id=fid)
+			for x in oldrec:
+				imgurl=x.image.url
+				pathtoimage=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+imgurl
+				if os.path.exists(pathtoimage):
+					os.remove(pathtoimage)
+					print('successfully deleted')
+			updrec.image=cimage
+			updrec.save()
+
+        
+		add=service_tb.objects.filter(id=fid).update(name=cname,price=cprice,desc=cdesc,gender=cgender,category=ccategory)
+		return HttpResponseRedirect('/admin_servtb/')
+	else:
+		fid=request.GET['uid']
+		data=service_tb.objects.filter(id=fid)
+		return render(request,"admin/servtb",{'details':data})
+
+def admin_servdlt(request):
+	    fid=request.GET['did']
+	    oldrec=service_tb.objects.filter(id=fid)
+	    for x in oldrec:
+	    	imgurl=x.image.url
+	    	pathtoimage=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+imgurl
+	    	if os.path.exists(pathtoimage):
+	    		os.remove(pathtoimage)
+	    data=service_tb.objects.filter(id=fid).delete()
+	    return HttpResponseRedirect('/admin_servtb/')
+
 
 def  admin_projects(request):
 	if request.method == "POST":
@@ -201,32 +244,32 @@ def admin_gallerytb(request):
 	return render(request,'admin/gallerytb.html',{'details':data})
 
 
-def admin_gallupd(request):
-	if request.method == "POST":
-		fid=request.GET['uid']
-		imgval=request.POST['imgup']
-		if imgval =="yes":
+# def admin_gallupd(request):
+# 	if request.method == "POST":
+# 		fid=request.GET['uid']
+# 		imgval=request.POST['imgup']
+# 		if imgval =="yes":
 
-			cimage=request.FILES['image']
-			oldrec=gallery_tb.objects.filter(id=fid)
-			updrec=gallery_tb.objects.get(id=fid)
-			for x in oldrec:
-				imgurl=x.image.url
-				pathtoimage=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+imgurl
-				if os.path.exists(pathtoimage):
-					os.remove(pathtoimage)
-					print('successfully deleted')
-			updrec.image=cimage
-			updrec.save()
+# 			cimage=request.FILES['image']
+# 			oldrec=gallery_tb.objects.filter(id=fid)
+# 			updrec=gallery_tb.objects.get(id=fid)
+# 			for x in oldrec:
+# 				imgurl=x.image.url
+# 				pathtoimage=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+imgurl
+# 				if os.path.exists(pathtoimage):
+# 					os.remove(pathtoimage)
+# 					print('successfully deleted')
+# 			updrec.image=cimage
+# 			updrec.save()
 
         
-		add=gallery_tb.objects.filter(id=fid).update(image=cimage)
-		return HttpResponseRedirect('/admin_gallerytb/')
+# 		add=gallery_tb.objects.filter(id=fid).update(image=cimage)
+# 		return HttpResponseRedirect('/admin_gallerytb/')
 
-	else:
-		fid=request.GET['uid']
-		data=gallery_tb.objects.filter(id=fid)
-		return render(request,"admin/gallupd.html",{'details':data})
+	# else:
+	# 	fid=request.GET['uid']
+	# 	data=gallery_tb.objects.filter(id=fid)
+	# 	return render(request,"admin/gallupd.html",{'details':data})
 
 
 def admin_galldlt(request):
@@ -240,3 +283,29 @@ def admin_galldlt(request):
 	    data=gallery_tb.objects.filter(id=fid).delete()
 	    return HttpResponseRedirect('/admin_gallerytb/')
 
+
+
+def admin_contacts(request):
+	if request.method == "POST":
+		cname=request.POST['name']
+		cemail=request.POST['email']
+		cphone=request.POST['phone']
+		csubject=request.POST['subject']
+		cmessage=request.POST['message']
+		check=contact_tb.objects.filter(email=cemail)
+		if check:
+			return render(request,'admin/contacts.html',{'error':'already registered'})
+		else:
+			add=contact_tb(name=cname,email=cemail,phone=cphone,subject=csubject,message=cmessage)
+			add.save()
+
+			x = ''.join(random.choices(cname + string.digits, k=8))
+			y = ''.join(random.choices(string.ascii_letters + string.digits, k=7))
+			subject = 'welcome to Kenz Architects and Interiors'
+			message = f'Hi {cname}, thank you for visiting Kenz Architects and Interiors'
+			email_from = settings.EMAIL_HOST_USER 
+			recipient_list = [cemail, ] 
+			send_mail( subject, message, email_from, recipient_list ) 
+		return render(request,'admin/index.html',{'success':"data saved"})
+	else:
+		return render(request,'admin/contacts.html')

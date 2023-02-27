@@ -8,6 +8,8 @@ urlpatterns = [
     path('services/',views.services),
     path('projects/',views.projects),
     path('gallery/',views.gallery),
+    path('servicespage/',views.servicespage),
+
 
 
 
@@ -20,12 +22,14 @@ urlpatterns = [
     path('admin_logout/',views.admin_logout),
     path('admin_service/',views.admin_service),
     path('admin_servtb/',views.admin_servtb),
+    path('admin_servupd/',views.admin_servupd),
+    path('admin_servdlt/',views.admin_servdlt),
     path('admin_projects/',views.admin_projects),
     path('admin_protb/',views.admin_protb),
     path('admin_projupd/',views.admin_projupd),
     path('admin_projdlt/',views.admin_projdlt),
     path('admin_gallery/',views.admin_gallery),
     path('admin_gallerytb/',views.admin_gallerytb),
-    path('admin_gallupd/',views.admin_gallupd),
     path('admin_galldlt/',views.admin_galldlt),
+    path('admin_contacts/',views.admin_contacts),
 ]
