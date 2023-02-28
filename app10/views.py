@@ -19,13 +19,13 @@ def contact(request):
 	return render(request,'contact.html')
 
 def gallery(request):
-	return render(request,'gallery.html')
+	data=gallery_tb.objects.all()
+	return render(request,'gallery.html',{'details':data})
 
 def projects(request):
 	return render(request,'projects.html')
 
 def services(request):
-	data=service_tb.objects.all()
 	return render(request,'services.html')
 
 def servicespage(request):
@@ -225,33 +225,6 @@ def admin_gallerytb(request):
 	data=gallery_tb.objects.all()
 	return render(request,'admin/gallerytb.html',{'details':data})
 
-
-# def admin_gallupd(request):
-# 	if request.method == "POST":
-# 		fid=request.GET['uid']
-# 		imgval=request.POST['imgup']
-# 		if imgval =="yes":
-
-# 			cimage=request.FILES['image']
-# 			oldrec=gallery_tb.objects.filter(id=fid)
-# 			updrec=gallery_tb.objects.get(id=fid)
-# 			for x in oldrec:
-# 				imgurl=x.image.url
-# 				pathtoimage=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+imgurl
-# 				if os.path.exists(pathtoimage):
-# 					os.remove(pathtoimage)
-# 					print('successfully deleted')
-# 			updrec.image=cimage
-# 			updrec.save()
-
-        
-# 		add=gallery_tb.objects.filter(id=fid).update(image=cimage)
-# 		return HttpResponseRedirect('/admin_gallerytb/')
-
-	# else:
-	# 	fid=request.GET['uid']
-	# 	data=gallery_tb.objects.filter(id=fid)
-	# 	return render(request,"admin/gallupd.html",{'details':data})
 
 
 def admin_galldlt(request):
