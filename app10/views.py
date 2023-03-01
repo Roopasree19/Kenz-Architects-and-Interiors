@@ -20,19 +20,22 @@ def contact(request):
 
 def gallery(request):
 	data=gallery_tb.objects.all()
-	return render(request,'gallery.html',{'details':data})
+	return render(request,'gallery.html',{'data':data})
 
 def projects(request):
-	return render(request,'projects.html')
+	data=project_tb.objects.all()
+	return render(request,'projects.html',{'details':data})
 
 def services(request):
-	return render(request,'services.html')
+	data=service_tb.objects.all()
+	return render(request,'services.html',{'details':data})
 
 def servicespage(request):
+	data=service_tb.objects.all()
 	if request.session.has_key("myid"):
 		fid=request.GET['pid']
 		data=service_tb.objects.filter(id=fid)
-	return render(request,'servicespage.html')
+	return render(request,'servicespage.html',{'details':data})
 
 
 

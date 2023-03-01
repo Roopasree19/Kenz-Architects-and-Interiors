@@ -8,10 +8,10 @@
                     <div class="col-md-4 mb-30 animate-box" data-animate-effect="fadeInUp">
                         <div class="sub-title border-bot-light">Services</div>
                     </div>
+                    {% for x in details %}
                     <div class="col-md-8 animate-box" data-animate-effect="fadeInUp">
-                        <div class="section-title"><span>Interior Design</span></div>
-                        <p>Architecture viverra tristique justo duision vitaen diaminte neque nivamus aestan ateuene artines aringianu the ateliten finibus viverra nec lacus in the nedana mis erodino setlie suscipe no curabit tristue.</p>
-                        <p>Decor plan nulla facilisi sedeuter nunc volutpat molli sapien veconseyer turpeutionyer mase libero sempe fuscen mollis augue sit amet hendrerit vestibulum. Duisteyerionyer venenatis lacus. Web gravida eros urpis interdum bornare interdum et malesu they adamale fames ache urabitur arcu.</p><br>
+                        <div class="section-title"><span>{{x.name}}</span></div>
+                        <p>{{x.desc}}</p><br>
                         <div class="row">
                             <!-- <div class="col-md-6 gallery-item">
                                 <a href="/static/images/projects/07.jpg" title="Interior Design" class="img-zoom">
@@ -29,14 +29,14 @@
                                     </div>
                                 </a>
                             </div> -->
-                            <div class="col-md-12 gallery-item">
+                            <!-- <div class="col-md-12 gallery-item">
                                 <a href="/static/images/slider/1.jpg" title="Interior Design" class="img-zoom">
                                     <div class="gallery-box">
                                         <div class="gallery-img"> <img src="/static/images/slider/1.jpg" class="img-fluid mx-auto d-block" alt=""> </div>
                                         <div class="gallery-detail text-center"> <i class="ti-fullscreen"></i> </div>
                                     </div>
                                 </a>
-                            </div>
+                            </div> -->
                             <div>
                                 <button>get in price</button>
                             </div>
@@ -58,6 +58,7 @@
                             </div> -->
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </section>

@@ -16,18 +16,20 @@
                 <div class="row">
                     <div class="col-md-8 offset-md-4">
                     <div class="row">
+                        {% for x in details %}
                     <div class="col-md-6 mb-5 animate-box" data-animate-effect="fadeInUp">
                         <div class="item bg-1">
                             <div class="con">
-                                <a href="/servicespage/?pid={{x.id}}">
-                                <div class="numb">01</div>
-                                <h5>Architecture</h5>
-                                <p>Architecture bibendum eros eget lacus the vulputate, sit amet vehicula nibh placerat in lectus vitae justo pulvinar cursus.</p>
+                                <a href="/servicespage/?uid={{x.id}}">
+                                <div class="numb"></div>
+                                <h5>{{x.name}}</h5>
+                                <p>{{x.desc}}</p>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-5 animate-box" data-animate-effect="fadeInUp">
+                     {% endfor %}
+                    <!-- <div class="col-md-6 mb-5 animate-box" data-animate-effect="fadeInUp">
                         <div class="item bg-2">
                             <div class="con">
                                 <a href="/servicespage/">
@@ -37,8 +39,8 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 mb-5 animate-box" data-animate-effect="fadeInUp">
+                    </div> -->
+                    <!-- <div class="col-md-6 mb-5 animate-box" data-animate-effect="fadeInUp">
                         <div class="item bg-3">
                             <div class="con">
                                 <a href="/servicespage/">
@@ -48,8 +50,8 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 mb-5 animate-box" data-animate-effect="fadeInUp">
+                    </div> -->
+                    <!-- <div class="col-md-6 mb-5 animate-box" data-animate-effect="fadeInUp">
                         <div class="item bg-4">
                             <div class="con">
                                 <a href="/servicespage/">
@@ -59,8 +61,8 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 mb-5 animate-box" data-animate-effect="fadeInUp">
+                    </div> -->
+                    <!-- <div class="col-md-6 mb-5 animate-box" data-animate-effect="fadeInUp">
                         <div class="item bg-5">
                             <div class="con">
                                 <a href="/servicespage/">
@@ -70,8 +72,8 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 mb-5 animate-box" data-animate-effect="fadeInUp">
+                    </div> -->
+                    <!-- <div class="col-md-6 mb-5 animate-box" data-animate-effect="fadeInUp">
                         <div class="item bg-6">
                             <div class="con">
                                 <a href="/servicespage/">
@@ -81,7 +83,7 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     </div>
                     </div>
                 </div>
