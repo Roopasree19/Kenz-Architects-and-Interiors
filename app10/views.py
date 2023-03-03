@@ -31,10 +31,8 @@ def services(request):
 	return render(request,'services.html',{'details':data})
 
 def servicespage(request):
-	data=service_tb.objects.all()
-	if request.session.has_key("myid"):
-		fid=request.GET['pid']
-		data=service_tb.objects.filter(id=fid)
+	fid=request.GET['uid']
+	data=service_tb.objects.filter(id=fid)
 	return render(request,'servicespage.html',{'details':data})
 
 
