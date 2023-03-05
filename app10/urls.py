@@ -10,7 +10,7 @@ urlpatterns = [
     path('gallery/',views.gallery),
     path('servicespage/',views.servicespage),
     path('contactus/',views.contactus),
-     path('blog2/',views.blog2),
+     path('get/',views.get),
 
 
 

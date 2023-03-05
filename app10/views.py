@@ -18,6 +18,9 @@ def about(request):
 def contact(request):
 	return render(request,'contact.html')
 
+def get(request):
+	return render(request,'get.html')
+
 def gallery(request):
 	data=gallery_tb.objects.all()
 	return render(request,'gallery.html',{'data':data})

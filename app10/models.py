@@ -25,3 +25,8 @@ class contact_tb(models.Model):
     phone=models.CharField(max_length=255)
     subject=models.CharField(max_length=255)
     message=models.TextField()
+
+class getin_tb(models.Model):
+    name=models.CharField(max_length=255)
+    phone=models.CharField(max_length=255)
+    message=models.TextField()
