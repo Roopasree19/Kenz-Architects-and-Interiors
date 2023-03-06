@@ -9,8 +9,7 @@ urlpatterns = [
     path('projects/',views.projects),
     path('gallery/',views.gallery),
     path('servicespage/',views.servicespage),
-    path('contactus/',views.contactus),
-     path('get/',views.get),
+    path('get/',views.get),
 
 
 
@@ -34,5 +33,6 @@ urlpatterns = [
     path('admin_gallery/',views.admin_gallery),
     path('admin_gallerytb/',views.admin_gallerytb),
     path('admin_galldlt/',views.admin_galldlt),
-    path('admin_contacts/',views.admin_contacts),
+    path('admin_contacttb/',views.admin_contacttb),
+    path('admin_usertb/',views.admin_usertb),
 ]

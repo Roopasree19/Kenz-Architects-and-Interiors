@@ -16,10 +16,50 @@ def about(request):
 
 
 def contact(request):
-	return render(request,'contact.html')
+	if request.method == "POST":
+		cname=request.POST['name']
+		cemail=request.POST['email']
+		cphone=request.POST['phone']
+		csubject=request.POST['subject']
+		cmessage=request.POST['message']
+		check=contact_tb.objects.filter(email=cemail)
+		if check:
+			return render(request,'contact.html',{'error':'already registered'})
+		else:
+			add=contact_tb(name=cname,email=cemail,phone=cphone,subject=csubject,message=cmessage)
+			add.save()
+
+			x = ''.join(random.choices(cname + string.digits, k=8))
+			y = ''.join(random.choices(string.ascii_letters + string.digits, k=7))
+			subject = 'welcome to Kenz Architects and Interiors'
+			message = f'Hi {cname}, thank you for visiting Kenz Architects and Interiors'
+			email_from = settings.EMAIL_HOST_USER 
+			recipient_list = [cemail, ] 
+			send_mail( subject, message, email_from, recipient_list ) 
+
+			return render(request,'index.html',{'success':"data saved"})
+	else:
+		return render(request,'contact.html')
+
+	
 
 def get(request):
-	return render(request,'get.html')
+	if request.method == "POST":
+		cname=request.POST['name']
+		cphone=request.POST['phone']
+		cmessage=request.POST['message']
+		check=getin_tb.objects.filter(phone=cphone)
+		if check:
+			return render(request,'get.html',{'error':'already registered'})
+		else:
+			add=getin_tb(name=cname,phone=cphone,message=cmessage)
+			add.save()
+
+			return render(request,'index.html',{'success':"data saved"})
+	else:
+		return render(request,'get.html')
+
+	
 
 def gallery(request):
 	data=gallery_tb.objects.all()
@@ -39,23 +79,6 @@ def servicespage(request):
 	return render(request,'servicespage.html',{'details':data})
 
 
-def contactus(request):
-	if request.method == "POST":
-		cname=request.POST['name']
-		cemail=request.POST['email']
-		cphone=request.POST['phone']
-		csubject=request.POST['subject']
-		cmessage=request.POST['message']
-		check=contact_tb.objects.filter(email=cemail)
-		if check:
-			return render(request,'headerfooter.html',{'error':'already registered'})
-		else:
-			add=contact_tb(name=cname,email=cemail,phone=cphone,subject=csubject,message=cmessage)
-			add.save()
-
-			return render(request,'index.html',{'success':"data saved"})
-	else:
-		return render(request,'headerfooter.html')
 
 def blog2(request):
 	return render(request,'blog2.html')
@@ -265,29 +288,15 @@ def admin_galldlt(request):
 
 
 
-def admin_contacts(request):
-	if request.method == "POST":
-		cname=request.POST['name']
-		cemail=request.POST['email']
-		cphone=request.POST['phone']
-		csubject=request.POST['subject']
-		cmessage=request.POST['message']
-		check=contact_tb.objects.filter(email=cemail)
-		if check:
-			return render(request,'admin/contacts.html',{'error':'already registered'})
-		else:
-			add=contact_tb(name=cname,email=cemail,phone=cphone,subject=csubject,message=cmessage)
-			add.save()
 
-			x = ''.join(random.choices(cname + string.digits, k=8))
-			y = ''.join(random.choices(string.ascii_letters + string.digits, k=7))
-			subject = 'welcome to Kenz Architects and Interiors'
-			message = f'Hi {cname}, thank you for visiting Kenz Architects and Interiors'
-			email_from = settings.EMAIL_HOST_USER 
-			recipient_list = [cemail, ] 
-			send_mail( subject, message, email_from, recipient_list ) 
-		return render(request,'admin/index.html',{'success':"data saved"})
-	else:
-		return render(request,'admin/contacts.html')
+
+def admin_contacttb(request):
+	data=contact_tb.objects.all()
+	return render(request,'admin/contacttb.html',{'details':data})
+
+def admin_usertb(request):
+	data=getin_tb.objects.all()
+	return render(request,'admin/usertb.html',{'details':data})
+
 
 

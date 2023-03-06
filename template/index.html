@@ -22,7 +22,7 @@
                                     
                                    <!--  <h1>Ultra-Modern House Design</h1> -->
                                     
-                                    <a href="/projects/" class="button-light">View Project</a> 
+                                    <!-- <a href="/projects/" class="button-light">View Project</a>  -->
                                 </div>
                             </div>
                         </div>
@@ -116,13 +116,14 @@
                         <li data-filter=".completed">Completed Projects</li>
                     </ul>
                 </div>
+                 {% for x in details %}
                 <div class="row projects2-items animate-box" data-animate-effect="fadeInUp">
                     <div class="col-md-6 single-item ongoing">
                         <div class="projects2-wrap">
-                            <a href="/projects/"><img src="/static/images/projects/06.jpg" alt=""></a>
+                            <a href="/projects/"><img src="{{x.image.url}}" alt=""></a>
                             <div class="projects2-con">
-                                <p>Project P.01</p>
-                                <h3><a href="/projects/">Modern Houses</a></h3>
+                               <!--  <p>Project P.01</p> -->
+                                <h3><a href="/projects/">{{x.name}}</a></h3>
                                 <a href="/projects/" class="project2-link"></a>
                             </div>
                         </div>
@@ -178,6 +179,7 @@
                         </div>
                     </div> -->
                 </div>
+                 {% endfor %}
                 
             </div>
         </div>

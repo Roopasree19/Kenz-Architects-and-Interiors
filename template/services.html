@@ -18,7 +18,7 @@
                     <div class="row">
                         {% for x in details %}
                     <div class="col-md-6 mb-5 animate-box" data-animate-effect="fadeInUp">
-                        <div class="item bg-1">
+                        <div style="background-image: url('{{x.image.url}}');" >
                             <div class="con">
                                 <a href="/servicespage/?uid={{x.id}}">
                                 <div class="numb"></div>
