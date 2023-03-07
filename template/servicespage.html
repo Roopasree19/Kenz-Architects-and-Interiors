@@ -10,13 +10,13 @@
                     </div>
                     {% for x in details %}
                     <div class="col-md-8 animate-box" data-animate-effect="fadeInUp">
-                        <div class="section-title"><span>{{x.name}}</span></div>
-                        <p>{{x.desc}}</p><br>
+                        <div class="section-title"><span>{{x.uid.name}}</span></div>
+                        <p>{{x.uid.desc}}</p><br>
                         <div class="row">
                             <div class="col-md-6 gallery-item">
                                 <a href="#" title="Interior Design" class="img-zoom">
                                     <div class="gallery-box">
-                                        <div class="gallery-img"> <img src="{{x.image.url}}" width="736" height="490.66" class="img-fluid mx-auto d-block" alt=""> </div>
+                                        <div class="gallery-img"> <img src="{{x.uid.image.url}}" width="736" height="490.66" class="img-fluid mx-auto d-block" alt=""> </div>
                                         <div class="gallery-detail text-center"> <i class="ti-fullscreen"></i> </div>
                                     </div>
                                 </a>
@@ -58,9 +58,11 @@
   border: 2px solid white;
 }
 </style>
+<form action="/get/?uid={{x.id}}" method="get">
 <div>
                                 <button type="submit" class="button button1">Get in price</button> 
                             </div>
+                            </form>
                            <!--  <div class="col-md-6 gallery-item">
                                 <a href="/static/images/slider/4.jpg" title="Interior Design" class="img-zoom">
                                     <div class="gallery-box">

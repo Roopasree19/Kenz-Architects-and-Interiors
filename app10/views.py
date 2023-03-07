@@ -9,7 +9,8 @@ from django.core.mail import send_mail
 
 # Create your views here.
 def index(request):
-	return render(request,'index.html')
+	data=project_tb.objects.all()
+	return render(request,'index.html',{'data':data})
 
 def about(request):
 	return render(request,'about.html')
@@ -99,14 +100,18 @@ def servicespage(request):
 
 
 
-def blog2(request):
-	return render(request,'blog2.html')
 
 
 
 
 
 #############################################################################
+#############################################################################
+
+
+
+
+
 def admin_index(request):
 	if request.session.has_key("my_id"):
 		return render(request,'admin/index.html')
