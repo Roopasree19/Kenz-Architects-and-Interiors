@@ -1,6 +1,14 @@
 {% extends 'headerfooter.html' %}
 {% block content %}
+ <style type="text/css">
+    {% for x in details %}
 
+                                .bg-service{{forloop.counter}}:hover{
+                                    background-image: url('{{x.image.url}}');
+                                    background-size: 100%;
+                                }
+                                {% endfor %}
+                            </style>
         <!-- Services -->
         <section class="services section-padding">
             <div class="container">
@@ -18,7 +26,8 @@
                     <div class="row">
                         {% for x in details %}
                     <div class="col-md-6 mb-5 animate-box" data-animate-effect="fadeInUp">
-                        <div style="background-image: url('{{x.image.url}}');" >
+                        <div  class="bg-service{{forloop.counter}}">
+                           
                             <div class="con">
                                 <a href="/servicespage/?uid={{x.id}}">
                                 <div class="numb"></div>
@@ -89,18 +98,6 @@
                 </div>
             </div>
         </section>
-      <!-- ARCHITECTURE
-       Our mission is to give our Clients the most effective, efficient and beautiful concept for their architectural needs in the best and most friendly way possible. We give great attention to details and preferences provided by our Customers
-
-       INTERIOR DESIGNING
-Our mission is to give our Clients the most effective, efficient and beautiful concept for their interior needs in the best and most friendly way possible. We give great attention to details and preferences provided by our Customers
-
-LANDSCAPE
-Being one of the leading architects in Kerala, Kenz Architects and Interiors has an approach to landscaping that has a firm basis in practicality issues stemming from maintenance.
-
-PRODUCT DESIGN
-Kenz Architects and Interiors, the best Interior designers In Kannur, Kerala takes the time to design the product from scratch so as to make sure every aspect of the project is theme-consistent and not out of place.
- -->
-        <!-- Lets Talk -->
+     
         
          {% endblock %}   

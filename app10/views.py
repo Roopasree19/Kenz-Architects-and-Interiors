@@ -41,6 +41,25 @@ def contact(request):
 	else:
 		return render(request,'contact.html')
 
+def contactus(request):
+	if request.method == "POST":
+		cname=request.POST['name']
+		cemail=request.POST['email']
+		cphone=request.POST['phone']
+		csubject=request.POST['subject']
+		cmessage=request.POST['message']
+		check=contact_tb.objects.filter(email=cemail)
+		if check:
+			return render(request,'index.html',{'error':'already registered'})
+		else:
+			add=contact_tb(name=cname,email=cemail,phone=cphone,subject=csubject,message=cmessage)
+			add.save()
+
+			return render(request,'index.html',{'success':"data saved"})
+	else:
+		return render(request,'contact.html')
+
+
 	
 
 def get(request):
