@@ -27,6 +27,8 @@ class contact_tb(models.Model):
     message=models.TextField()
 
 class getin_tb(models.Model):
+    sername=models.ForeignKey(service_tb, on_delete=models.CASCADE)
+    email=models.CharField(max_length=255)
     name=models.CharField(max_length=255)
     phone=models.CharField(max_length=255)
     message=models.TextField()

@@ -64,20 +64,24 @@ def contactus(request):
 	
 
 def get(request):
+	data=service_tb.objects.all()
 	if request.method == "POST":
+		sid=request.GET['sid']
 		cname=request.POST['name']
 		cphone=request.POST['phone']
+		cemail=request.POST['email']
 		cmessage=request.POST['message']
-		check=getin_tb.objects.filter(phone=cphone)
+		sid=service_tb.objects.get(id=sid )
+		check=getin_tb.objects.filter(email=cemail)
 		if check:
-			return render(request,'get.html',{'error':'already registered'})
+			return render(request,'get.html',{'error':'already registered'},{'details':data})
 		else:
-			add=getin_tb(name=cname,phone=cphone,message=cmessage)
+			add=getin_tb(name=cname,phone=cphone,message=cmessage,sername=sid)
 			add.save()
 
 			return render(request,'index.html',{'success':"data saved"})
 	else:
-		return render(request,'get.html')
+		return render(request,'get.html',{'details':data})
 
 	
 
