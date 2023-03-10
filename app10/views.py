@@ -10,6 +10,8 @@ from django.core.mail import send_mail
 # Create your views here.
 def index(request):
 	data=project_tb.objects.all()
+	# q=project_tb.objects.all()
+
 	return render(request,'index.html',{'data':data})
 
 def about(request):
@@ -32,13 +34,17 @@ def contact(request):
 
 			x = ''.join(random.choices(cname + string.digits, k=8))
 			y = ''.join(random.choices(string.ascii_letters + string.digits, k=7))
-			subject = 'welcome to Kenz Architects and Interiors'
-			message = f'Hi {cname}, thank you for visiting Kenz Architects and Interiors'
-			email_from = settings.EMAIL_HOST_USER 
-			recipient_list = [cemail, ] 
-			send_mail( subject, message, email_from, recipient_list ) 
-
-			return render(request,'index.html',{'success':"data saved"})
+			subject = 'Welcome to Kenz Architects and Interiors'
+			message = f'Hi {cname}, Thank you for valuable feeback.'
+			email_from = settings.EMAIL_HOST_USER
+			recipient_list = [cemail, ]
+			send_mail( subject, message, email_from, recipient_list )
+			asubject = 'Contact form '
+			amessage = f' A message from  {cname}, message is {cmessage}, contact number is {cphone} '
+			aemail_from = settings.EMAIL_HOST_USER 
+			arecipient_list = [settings.EMAIL_HOST_USER , ] 
+			send_mail( asubject, amessage, aemail_from, arecipient_list )
+			return render(request,'index.html',{'success':'Data Saved'})
 	else:
 		return render(request,'contact.html')
 
@@ -55,8 +61,19 @@ def contactus(request):
 		else:
 			add=contact_tb(name=cname,email=cemail,phone=cphone,subject=csubject,message=cmessage)
 			add.save()
-
-			return render(request,'index.html',{'success':"data saved"})
+			x = ''.join(random.choices(cname + string.digits, k=8))
+			y = ''.join(random.choices(string.ascii_letters + string.digits, k=7))
+			subject = 'Welcome to Kenz Architects and Interiors'
+			message = f'Hi {cname}, Thank you for valuable feeback.'
+			email_from = settings.EMAIL_HOST_USER
+			recipient_list = [cemail, ]
+			send_mail( subject, message, email_from, recipient_list )
+			asubject = 'Contact form '
+			amessage = f' A message from  {cname}, message is {cmessage}, contact number is {cphone} '
+			aemail_from = settings.EMAIL_HOST_USER 
+			arecipient_list = [settings.EMAIL_HOST_USER , ] 
+			send_mail( asubject, amessage, aemail_from, arecipient_list )
+			return render(request,'index.html',{'success':'Data Saved'})
 	else:
 		return render(request,'contact.html')
 
@@ -64,24 +81,37 @@ def contactus(request):
 	
 
 def get(request):
-	data=service_tb.objects.all()
+	# data=service_tb.objects.all()
 	if request.method == "POST":
 		sid=request.GET['sid']
+		cemail=request.POST['email']
 		cname=request.POST['name']
 		cphone=request.POST['phone']
-		cemail=request.POST['email']
 		cmessage=request.POST['message']
 		sid=service_tb.objects.get(id=sid )
 		check=getin_tb.objects.filter(email=cemail)
 		if check:
-			return render(request,'get.html',{'error':'already registered'},{'details':data})
+			sid=request.GET['sid']
+			return render(request,'get.html',{'error':'already registered','details':sid})
 		else:
-			add=getin_tb(name=cname,phone=cphone,message=cmessage,sername=sid)
+			add=getin_tb(email=cemail,name=cname,phone=cphone,message=cmessage,sername=sid)
 			add.save()
-
-			return render(request,'index.html',{'success':"data saved"})
+			x = ''.join(random.choices(cname + string.digits, k=8))
+			y = ''.join(random.choices(string.ascii_letters + string.digits, k=7))
+			subject = 'Welcome to Kenz Architects and Interiors'
+			message = f'Hi {cname}, Thank you for valuable feeback.'
+			email_from = settings.EMAIL_HOST_USER
+			recipient_list = [cemail, ]
+			send_mail( subject, message, email_from, recipient_list )
+			asubject = 'Contact form '
+			amessage = f' A message from  {cname}, message is {cmessage}, contact number is {cphone} '
+			aemail_from = settings.EMAIL_HOST_USER 
+			arecipient_list = [settings.EMAIL_HOST_USER , ] 
+			send_mail( asubject, amessage, aemail_from, arecipient_list )
+			return render(request,'index.html',{'success':'Data Saved'})
 	else:
-		return render(request,'get.html',{'details':data})
+		sid=request.GET['sid']
+		return render(request,'get.html',{'details':sid})
 
 	
 
@@ -100,7 +130,9 @@ def services(request):
 def servicespage(request):
 	fid=request.GET['uid']
 	data=service_tb.objects.filter(id=fid)
-	return render(request,'servicespage.html',{'details':data})
+	abc=project_tb.objects.all()
+
+	return render(request,'servicespage.html',{'details':data,'datas':abc})
 
 
 
@@ -314,8 +346,9 @@ def admin_galldlt(request):
 	    data=gallery_tb.objects.filter(id=fid).delete()
 	    return HttpResponseRedirect('/admin_gallerytb/')
 
-
-
+def admin_servicebooking(request):
+	data=getin_tb.objects.all()
+	return render(request,'admin/service_booking.html',{'details':data})
 
 
 def admin_contacttb(request):
