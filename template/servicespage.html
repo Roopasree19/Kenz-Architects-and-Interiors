@@ -105,11 +105,13 @@
                         <div class="section-title"><span>Other</span> Services</div>
                     </div>
                 </div>
+                  
                 <div class="row">
                  
                 <div class="col-md-12">
-                    {% for x in datas %}
+                  
                     <div class="owl-carousel owl-theme">
+                      {% for x in datas %}
                       <!--   <div class="item bg-1 mb-4"> -->
                         <div  class="bg-service{{forloop.counter}}">
                             <div class="con">
@@ -120,13 +122,15 @@
                                 </a>
                             </div>
                         </div>
+                         {% endfor %}
                        
                         
                     </div>
-                     {% endfor %}
+                     
                 </div>
                
                 </div>
+               
             </div>
         </section>
         <!-- Lets Talk -->

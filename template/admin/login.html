@@ -43,7 +43,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																	{% csrf_token %}
 																		<input type="text" class="text" value="E-mail address" name="email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-mail address';}" >
 																		<input type="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
-																		<div class="submit"><input type="submit" onclick="myFunction()" value="Login" ></div>
+																		<div class="submit"><input type="submit" onclick="myFunction()" value="Login" >
+																		<script>
+                                function myFunction() {
+                                  alert("Successfully Booked");
+                                }
+                                </script>
+</div>
 																		<div class="clearfix"></div>
 																		
 																		<div class="new">

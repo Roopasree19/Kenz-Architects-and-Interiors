@@ -18,6 +18,12 @@ def about(request):
 	return render(request,'about.html')
 
 
+
+def index2(request):
+	return render(request,'index2.html')
+
+
+
 def contact(request):
 	if request.method == "POST":
 		cname=request.POST['name']

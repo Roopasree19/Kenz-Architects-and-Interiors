@@ -11,6 +11,7 @@ urlpatterns = [
     path('servicespage/',views.servicespage),
     path('get/',views.get),
     path('contactus/',views.contactus),
+    path('index2/',views.index2),
 
 
 
