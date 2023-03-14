@@ -11,8 +11,7 @@ urlpatterns = [
     path('servicespage/',views.servicespage),
     path('get/',views.get),
     path('contactus/',views.contactus),
-    path('index2/',views.index2),
-
+   
 
 
 
@@ -35,7 +34,7 @@ urlpatterns = [
     path('admin_gallery/',views.admin_gallery),
     path('admin_gallerytb/',views.admin_gallerytb),
     path('admin_galldlt/',views.admin_galldlt),
-     path('admin_service_booking/',views.admin_servicebooking),
+    path('admin_service_booking/',views.admin_servicebooking),
     path('admin_contacttb/',views.admin_contacttb),
-    path('admin_usertb/',views.admin_usertb),
+    path('admin_servicebooking_tb/',views.admin_servicebooking),
 ]

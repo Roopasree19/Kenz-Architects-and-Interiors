@@ -18,12 +18,6 @@ def about(request):
 	return render(request,'about.html')
 
 
-
-def index2(request):
-	return render(request,'index2.html')
-
-
-
 def contact(request):
 	if request.method == "POST":
 		cname=request.POST['name']
@@ -95,7 +89,7 @@ def get(request):
 		cphone=request.POST['phone']
 		cmessage=request.POST['message']
 		sid=service_tb.objects.get(id=sid )
-		check=getin_tb.objects.filter(email=cemail)
+		check=getin_tb.objects.filter(phone=cphone)
 		if check:
 			sid=request.GET['sid']
 			return render(request,'get.html',{'error':'already registered','details':sid})
@@ -105,12 +99,12 @@ def get(request):
 			x = ''.join(random.choices(cname + string.digits, k=8))
 			y = ''.join(random.choices(string.ascii_letters + string.digits, k=7))
 			subject = 'Welcome to Kenz Architects and Interiors'
-			message = f'Hi {cname}, Thank you for valuable feeback.'
+			message = f'Hi {cname}, Thank you for booking our services.'
 			email_from = settings.EMAIL_HOST_USER
 			recipient_list = [cemail, ]
 			send_mail( subject, message, email_from, recipient_list )
 			asubject = 'Contact form '
-			amessage = f' A message from  {cname}, message is {cmessage}, contact number is {cphone} '
+			amessage = f' A message from  {cname}, {cmessage}, {cphone} '
 			aemail_from = settings.EMAIL_HOST_USER 
 			arecipient_list = [settings.EMAIL_HOST_USER , ] 
 			send_mail( asubject, amessage, aemail_from, arecipient_list )
@@ -136,7 +130,7 @@ def services(request):
 def servicespage(request):
 	fid=request.GET['uid']
 	data=service_tb.objects.filter(id=fid)
-	abc=project_tb.objects.all()
+	abc=service_tb.objects.all()
 
 	return render(request,'servicespage.html',{'details':data,'datas':abc})
 
@@ -155,24 +149,23 @@ def servicespage(request):
 
 
 def admin_index(request):
-	if request.session.has_key("my_id"):
+	if request.session.has_key("id"):
 		return render(request,'admin/index.html')
 	else:
-		return HttpResponseRedirect('/admin_login')
+		return HttpResponseRedirect('/admin_login/')
 
 		
 def admin_register(request):
 	if request.method == "POST":
 		cemail=request.POST['email']
 		cpassword=request.POST['password']
-		cpass=request.POST['confirmpassword']
 		check=reg_tb.objects.filter(email=cemail)
 		if check:
 			return render(request,'admin/register.html',{'error':'Already registered'})
 		else:
-			add=reg_tb(email=cemail,password=cpassword,conformpassword=cpass)
+			add=reg_tb(email=cemail,password=cpassword)
 			add.save()
-		return render(request,'admin/index.html',{'success':"successfully registered"})
+		return render(request,'admin/login.html',{'success':"successfully registered"})
 	else:
 	    return render(request,'admin/register.html')
 
@@ -185,7 +178,7 @@ def admin_login(request):
 			for x in check:
 				request.session['id']=x.id
 				request.session['email']=x.email
-			return render(request,'admin/index.html',{'success':'successfully logined'})
+			return render(request,'admin/index.html',{'success': 'successfully logined'})
 		else:
 			return render(request,'admin/login.html',{'error':' invalid details'})
 	else:
@@ -201,24 +194,31 @@ def admin_logout(request):
 
 
 def  admin_service(request):
-	if request.method == "POST":
-		cname=request.POST['name']
-		cdesc=request.POST['desc']
-		cimage=request.FILES['image']
-		check=service_tb.objects.filter(name=cname)
-		if check:
-			return render(request,'admin/service.html',{'error':'already registered'})
+	if request.session.has_key("id"):
+		if request.method == "POST":
+			cname=request.POST['name']
+			cdesc=request.POST['desc']
+			cimage=request.FILES['image']
+			check=service_tb.objects.filter(name=cname)
+			if check:
+				return render(request,'admin/service.html',{'error':'already registered'})
+			else:
+				add=service_tb(name=cname,desc=cdesc,image=cimage)
+				add.save()
+				return render(request,'admin/index.html',{'success':"data saved"})
 		else:
-			add=service_tb(name=cname,desc=cdesc,image=cimage)
-			add.save()
-		return render(request,'admin/index.html',{'success':"data saved"})
+			return render(request,'admin/service.html')
 	else:
-		return render(request,'admin/service.html')
+		return HttpResponseRedirect('/admin_login/')
 
 
 def admin_servtb(request):
-	data=service_tb.objects.all()
-	return render(request,'admin/servtb.html',{'details':data})
+	if request.session.has_key("id"):
+		if request.session.has_key("id"):
+			data=service_tb.objects.all()
+			return render(request,'admin/servtb.html',{'details':data})
+	else:
+		return HttpResponseRedirect('/admin_login/')
 
 def admin_servupd(request):
 	if request.method == "POST":
@@ -261,23 +261,29 @@ def admin_servdlt(request):
 
 
 def  admin_projects(request):
-	if request.method == "POST":
-		cname=request.POST['name']
-		cimage=request.FILES['image']
-		check=project_tb.objects.filter(name=cname)
-		if check:
-			return render(request,'admin/projects.html',{'error':'already registered'})
+	if request.session.has_key("id"):
+		if request.method == "POST":
+			cname=request.POST['name']
+			cimage=request.FILES['image']
+			check=project_tb.objects.filter(name=cname)
+			if check:
+				return render(request,'admin/projects.html',{'error':'already registered'})
+			else:
+				add=project_tb(name=cname,image=cimage)
+				add.save()
+				return render(request,'admin/index.html',{'success':"data saved"})
 		else:
-			add=project_tb(name=cname,image=cimage)
-			add.save()
-		return render(request,'admin/index.html',{'success':"data saved"})
+			return render(request,'admin/projects.html')
 	else:
-		return render(request,'admin/projects.html')
+		return HttpResponseRedirect('/admin_login/')
 
 
 def admin_protb(request):
-	data=project_tb.objects.all()
-	return render(request,'admin/protb.html',{'details':data})
+	if request.session.has_key("id"):
+		data=project_tb.objects.all()
+		return render(request,'admin/protb.html',{'details':data})
+	else:
+		return HttpResponseRedirect('/admin_login/')	
 
 
 
@@ -323,21 +329,27 @@ def admin_projdlt(request):
 
 
 def  admin_gallery(request):
-	if request.method == "POST":
-		cimage=request.FILES['image']
-		check=gallery_tb.objects.filter(image=cimage)
-		if check:
-			return render(request,'admin/gallery.html',{'error':'already registered'})
+	if request.session.has_key("id"):
+		if request.method == "POST":
+			cimage=request.FILES['image']
+			check=gallery_tb.objects.filter(image=cimage)
+			if check:
+				return render(request,'admin/gallery.html',{'error':'already registered'})
+			else:
+				add=gallery_tb(image=cimage)
+				add.save()
+				return render(request,'admin/index.html',{'success':"data saved"})
 		else:
-			add=gallery_tb(image=cimage)
-			add.save()
-		return render(request,'admin/index.html',{'success':"data saved"})
+			return render(request,'admin/gallery.html')
 	else:
-		return render(request,'admin/gallery.html')
+		return HttpResponseRedirect('/admin_login/')
 
 def admin_gallerytb(request):
-	data=gallery_tb.objects.all()
-	return render(request,'admin/gallerytb.html',{'details':data})
+	if request.session.has_key("id"):
+		data=gallery_tb.objects.all()
+		return render(request,'admin/gallerytb.html',{'details':data})
+	else:
+		return HttpResponseRedirect('/admin_login/')
 
 
 
@@ -352,18 +364,23 @@ def admin_galldlt(request):
 	    data=gallery_tb.objects.filter(id=fid).delete()
 	    return HttpResponseRedirect('/admin_gallerytb/')
 
+
+
 def admin_servicebooking(request):
-	data=getin_tb.objects.all()
-	return render(request,'admin/service_booking.html',{'details':data})
+	if request.session.has_key("id"):
+		data=getin_tb.objects.all()
+		return render(request,'admin/servicebooking_tb.html',{'details':data})
+	else:
+		return HttpResponseRedirect('/admin_login/')
 
 
 def admin_contacttb(request):
-	data=contact_tb.objects.all()
-	return render(request,'admin/contacttb.html',{'details':data})
+	if request.session.has_key("id"):
+		data=contact_tb.objects.all()
+		return render(request,'admin/contacttb.html',{'details':data})
+	else:
+		return HttpResponseRedirect('/admin_login/')
 
-def admin_usertb(request):
-	data=getin_tb.objects.all()
-	return render(request,'admin/usertb.html',{'details':data})
 
 
 
