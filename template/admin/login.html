@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Augment an Admin Panel Category Flat Bootstrap Responsive Web Template | Login :: w3layouts</title>
+<link rel="icon" type="/static/image/png" href="/static/images/profileimage.png" />
+<title>Kenz Architects and Interiors Admin</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Augment Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -19,6 +20,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="/static/backend/css/icon-font.min.css" type='text/css' />
 <!-- //lined-icons -->
 <script src="/static/backend/js/jquery-1.10.2.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <!--clock init-->
 </head> 
 <body>
@@ -32,36 +35,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 													    <div class="login">
 													    	<!-- <h4 style="color:red; text-align: center;">{{error}}</h4> -->
 														<h3 class="inner-tittle t-inner">Login</h3>
-																<div class="buttons login">
-																			<ul>
-																				<li><a href="#" class="hvr-sweep-to-right">Facebook</a></li>
-																				<li class="lost"><a href="#" class="hvr-sweep-to-left">Twitter</a> </li>
-																				<div class="clearfix"></div>
-																			</ul>
-																		</div>
+																
 																<form method="post" action="/admin_login/">
 																	{% csrf_token %}
 																		<input type="text" class="text" value="E-mail address" name="email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-mail address';}" >
-																		<input type="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+																		<input type="password"  name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
 																		<div class="submit"><input type="submit" onclick="myFunction()" value="Login" >
-																		<script>
-																			{% if msg %}
-                               
-                                  alert("Successfully Logined");
-                                {% endif %}
-                                {% if error %}
-                               
-                                  alert("Invalid Details");
-                                {% endif %}
-                                </script>
+																			<script type="text/javascript">
+   {% if success %}
+  swal("{{success}}", "","success");
+  {% elif error %}
+  swal("{{error}}","", "error");
+  {% endif %}
+  </script>
 </div>
 																		<div class="clearfix"></div>
 																		
-																		<div class="new">
-																			<p><label class="checkbox11"><input type="checkbox" name="checkbox"><i> </i>Forgot Password ?</label></p>
+																		<!-- <div class="new"> -->
+																			
 														<p class="sign">Do not have an account ? <a href="/admin_register/">Sign Up</a></p>
 																			<div class="clearfix"></div>
-																		</div>
+																		<!-- </div> -->
 																	</form>
 														</div>
 
@@ -77,9 +71,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										  	<!--//login-->
 										  
 			<div class="footer">
-												<div class="error-btn">
-															<a class="read fourth" href="/admin_index/">Return to Home</a>
-															</div>
+												
 										   
 										</div>
 									<!--footer section end-->

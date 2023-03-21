@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Augment an Admin Panel Category Flat Bootstrap Responsive Web Template | Login :: w3layouts</title>
+<link rel="icon" type="/static/image/png" href="/static/images/profileimage.png" />
+<title>Kenz Architects and Interiors Admin</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Augment Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -19,6 +20,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="/static/backend/css/icon-font.min.css" type='text/css' />
 <!-- //lined-icons -->
 <script src="/static/backend/js/jquery-1.10.2.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+         <script type="text/javascript">
+   {% if success %}
+  swal("{{success}}", "","success");
+  {% elif error %}
+  swal("{{error}}","", "error");
+  {% endif %}
+  </script>
 <!--clock init-->
 </head> 
 <body>
@@ -34,8 +43,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														<h3 class="inner-tittle t-inner">Register</h3>
 																<form  action="/admin_register/" method="post">
 																	{% csrf_token %}
-																		<input type="text" class="text" value="E-mail address" name="email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-mail address';}" >
-																		<input type="password" id="password"  name="password" >
+																		<input type="text" class="text" value="E-mail address" pattern="[^ @]*@[^ @]*"  name="email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-mail address';}" >
+																		<input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"	 id="password"  name="password" >
 																		<input type="password"  id="confirm_password" name="confirmpassword" > 
 																		<div class="sign-up">
 																					<input type="reset" value="Reset">

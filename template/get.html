@@ -1,8 +1,13 @@
 {% extends 'headerfooter.html' %}
 {% block content %}
-
-         
-
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+         <script type="text/javascript">
+   {% if success %}
+  swal("{{success}}", "","success");
+  {% elif error %}
+  swal("{{error}}","", "error");
+  {% endif %}
+  </script>
 
          <!-- Contact -->
         <div class="contact section-padding">
@@ -31,20 +36,14 @@
                                     <input name="name" type="text" placeholder="Your Name *" required>
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <input name="phone" type="text" placeholder="Your Number *" required>
+                                    <input name="phone" type="text" maxlength="10" placeholder="Your Number *" required>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <textarea name="message" id="message" cols="30" rows="4" placeholder="Address *" required></textarea>
                                 </div>
                               
-                                <button onclick="myFunction()">Submit </button>
-
-                                <script>
-                                function myFunction() {
-                                  alert("Successfully Booked");
-                                }
-                                </script>
-
+                                <button>Submit </button>
+                               
                             </div>
                         </form>
                       

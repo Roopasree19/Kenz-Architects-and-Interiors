@@ -5,6 +5,15 @@
  		margin-top: 17%
  	}
  </style>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ <script type="text/javascript">
+   {% if success %}
+  swal("{{success}}", "","success");
+  {% elif error %}
+  swal("{{error}}","", "error");
+  {% endif %}
+  </script>
+
 
 						<div class="outter-wp">
 													 
@@ -13,6 +22,7 @@
                                       <!-- <h4 style="color:red; text-align: center;">{{success}}</h4> -->                        
                                     <h1>KENZ ARCHITECTS AND INTERIORS </h1>
                      </div>
+                    <!--  <h4 style="color:red;text-align:center;">{{success}}</h4>  -->
                           <div class="custom-widgets">
 	                       <div class="row-one top" style="display: flex; justify-content: center;">
 														

@@ -10,8 +10,6 @@ from django.core.mail import send_mail
 # Create your views here.
 def index(request):
 	data=project_tb.objects.all()
-	# q=project_tb.objects.all()
-
 	return render(request,'index.html',{'data':data})
 
 def about(request):
@@ -27,7 +25,7 @@ def contact(request):
 		cmessage=request.POST['message']
 		check=contact_tb.objects.filter(email=cemail)
 		if check:
-			return render(request,'contact.html',{'error':'already registered'})
+			return render(request,'contact.html',{'error':'Already Submited'})
 		else:
 			add=contact_tb(name=cname,email=cemail,phone=cphone,subject=csubject,message=cmessage)
 			add.save()
@@ -44,7 +42,7 @@ def contact(request):
 			aemail_from = settings.EMAIL_HOST_USER 
 			arecipient_list = [settings.EMAIL_HOST_USER , ] 
 			send_mail( asubject, amessage, aemail_from, arecipient_list )
-			return render(request,'index.html',{'success':'Data Saved'})
+			return render(request,'index.html',{'success':'Thank You For Submitting'})
 	else:
 		return render(request,'contact.html')
 
@@ -57,7 +55,7 @@ def contactus(request):
 		cmessage=request.POST['message']
 		check=contact_tb.objects.filter(email=cemail)
 		if check:
-			return render(request,'index.html',{'error':'already registered'})
+			return render(request,'index.html',{'error':'already Submited'})
 		else:
 			add=contact_tb(name=cname,email=cemail,phone=cphone,subject=csubject,message=cmessage)
 			add.save()
@@ -73,7 +71,7 @@ def contactus(request):
 			aemail_from = settings.EMAIL_HOST_USER 
 			arecipient_list = [settings.EMAIL_HOST_USER , ] 
 			send_mail( asubject, amessage, aemail_from, arecipient_list )
-			return render(request,'index.html',{'success':'Data Saved'})
+			return render(request,'index.html',{'success':'Thank You For Submitting'})
 	else:
 		return render(request,'contact.html')
 
@@ -92,7 +90,7 @@ def get(request):
 		check=getin_tb.objects.filter(phone=cphone)
 		if check:
 			sid=request.GET['sid']
-			return render(request,'get.html',{'error':'already registered','details':sid})
+			return render(request,'get.html',{'error':'Already Booked','details':sid})
 		else:
 			add=getin_tb(email=cemail,name=cname,phone=cphone,message=cmessage,sername=sid)
 			add.save()
@@ -108,7 +106,7 @@ def get(request):
 			aemail_from = settings.EMAIL_HOST_USER 
 			arecipient_list = [settings.EMAIL_HOST_USER , ] 
 			send_mail( asubject, amessage, aemail_from, arecipient_list )
-			return render(request,'index.html',{'success':'Data Saved'})
+			return render(request,'index.html',{'success':'Thank You For Booking'})
 	else:
 		sid=request.GET['sid']
 		return render(request,'get.html',{'details':sid})
@@ -131,7 +129,6 @@ def servicespage(request):
 	fid=request.GET['uid']
 	data=service_tb.objects.filter(id=fid)
 	abc=service_tb.objects.all()
-
 	return render(request,'servicespage.html',{'details':data,'datas':abc})
 
 
